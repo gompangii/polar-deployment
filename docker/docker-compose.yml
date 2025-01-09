@@ -31,7 +31,7 @@ services:
 
 
   config-service:
-    image: "compangii/config-service:latest"
+    image: "gompangii/config-service:latest"
     container_name: "config-service"
     ports:
       - 8888:8888
