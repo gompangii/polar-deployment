@@ -64,7 +64,9 @@ services:
   polar-keycloak:
     image: "docker.io/keycloak/keycloak"
     container_name: "polar-keycloak"
-    command: start-dev
+    command: start-dev --import-realm
+    volumes:
+      - ./keycloak:/opt/keycloak/data/import
     environment:
       - KEYCLOAK_ADMIN=user
       - KEYCLOAK_ADMIN_PASSWORD=password
