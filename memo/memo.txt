@@ -1,0 +1,36 @@
+# 11.2 키클록을 통한 사용자 계정 관리
+## 예제 11.3 도커 컴포즈에서 키클록 컨테이너 정의(docker/docker-compose.yml 파일)
+### 이미지 TAG 를 책 예시와 같이(image: quay.io/keycloak/keycloak:24.0) 하면 회사 네트워크에서는 보안때문에 image pull 이 안됨(아래와 같이 수정)
+
+  polar-keycloak:
+    image: "docker.io/keycloak/keycloak"
+    container_name: "polar-keycloak"
+    command: start-dev
+    environment:
+      - KEYCLOAK_ADMIN=user
+      - KEYCLOAK_ADMIN_PASSWORD=password
+    ports:
+      - 8080:8080
+
+# 11.2.1 보안 영역 정의(키클록)
+ $ docker exec -it polar-keycloak bash
+ $ cd /opt/keycloak/bin
+ $ ./kcadm.sh config credentials --server http://localhost:8080 --realm master --user user --password password
+ $ ./kcadm.sh create realms -s realm=PolarBookshop -s enabled=true
+
+# 11.2.2 사용자 및 역할 관리
+ $ ./kcadm.sh create roles -r PolarBookshop -s name=employee
+ $ ./kcadm.sh create roles -r PolarBookshop -s name=customer
+## 이자벨 달  사용자 추가
+ $ ./kcadm.sh create users -r PolarBookshop -s username=isabelle -s firstName=Isabelle -s lastName=Dahl -s enabled=true
+ ## 책 예시 중 --username -> --uusername 으로 수정(./kcadm.sh add-roles --help 로 확인)
+ $ ./kcadm.sh add-roles -r PolarBookshop --uusername isabelle --rolename employee --rolename customer
+
+## 빈테르베르그 사용자 추가
+ $ ./kcadm.sh create users -r PolarBookshop -s username=bjorn -s firstName=Bjorn -s lastName=Vinterberg -s enabled=true
+ $ ./kcadm.sh add-roles -r PolarBookshop --uusername bjorn --rolename customer
+
+## 사용자 패스워드 임의 지정
+ $ ./kcadm.sh set-password -r PolarBookshop --username isabelle --new-password password
+ $ ./kcadm.sh set-password -r PolarBookshop --username bjorn --new-password password
+
