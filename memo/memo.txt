@@ -38,4 +38,6 @@
  $ ./kcadm.sh config credentials --server http://localhost:8080 --realm master --user user --password password
  $ ./kcadm.sh create clients -r PolarBookshop -s clientId=edge-service -s enabled=true -s publicClient=false -s secret=polar-keycloak-secret -s 'redirectUris=["http://192.168.56.40:9000", "http://192.168.56.40:9000/login/oauth2/code/*"]'
 
+# 12.3.1 스프링 부트 OAuth2리소스 서버 보호
+ $ docker compose up -d polar-ui polar-keycloak polar-redis polar-rabbitmq
 
