@@ -1,6 +1,9 @@
 version: "3.8"
 services:
   catalog-service:
+    depends_on:
+      - fluent-bit
+      - polar-keycloak
     #image: "docker.io/gompangii/catalog-service:latest"
     image: "catalog-service:latest"
     container_name: "catalog-service"
@@ -15,6 +18,10 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mariadb://192.168.56.40:3306/polardb_catalog
       - SPRING_PROFILES_ACTIVE=testdata
       - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://192.168.56.40:8080/realms/PolarBookshop
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: 127.0.0.1:24224
 
   order-service:
     depends_on:
