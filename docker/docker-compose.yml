@@ -28,6 +28,7 @@ services:
       options:
         fluentd-address: 127.0.0.1:24224
 
+
   order-service:
     depends_on:
       - fluent-bit
