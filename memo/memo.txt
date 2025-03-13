@@ -41,3 +41,8 @@
 # 12.3.1 스프링 부트 OAuth2리소스 서버 보호
  $ docker compose up -d polar-ui polar-keycloak polar-redis polar-rabbitmq
 
+# 13.4.2 오픈텔레메트리를 사용해 스프링 부트에서 추적 구성하기
+## 책 예시 대로 하면 컨테이너가 안롤라감(이유는 모름)
+## - OTEL_EXPORTER_OTLP_PROTOCOL=grpc  를 추가 하면 잘 동작함(>..<)
+
+
