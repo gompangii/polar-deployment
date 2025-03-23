@@ -71,23 +71,3 @@ spec:
       targetPort: 8080
       nodePort: 30880
 
----
-
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: keycloak-ingress
-  labels:
-    app: polar-keycloak
-spec:
-  rules:
-    - host: polar-keycloak
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: polar-keycloak
-                port:
-                  number: 80
