@@ -5,12 +5,12 @@ metadata:
   labels:
     app: polar-keycloak
 spec:
-  #type: NodePort
-  type: ClusterIP
+  type: NodePort
+  #type: ClusterIP
   selector:
     app: polar-keycloak
   ports:
     - protocol: TCP
       port: 80
       targetPort: 8080
-      #nodePort: 30880
+      nodePort: 30880
