@@ -45,3 +45,27 @@ spec:
           configMap:
             name: rabbitmq-config
 
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: polar-rabbitmq
+  labels:
+    db: polar-rabbitmq
+spec:
+  type: ClusterIP
+  #type: NodePort
+  selector:
+    db: polar-rabbitmq
+  ports:
+    - name: amqp
+      protocol: TCP
+      port: 5672
+      targetPort: 5672
+      #nodePort: 30567
+    - name: management
+      protocol: TCP
+      port: 15672
+      targetPort: 15672
+      #nodePort: 31567

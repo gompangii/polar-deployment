@@ -52,3 +52,44 @@ spec:
         - name: polar-keycloak-config-volume
           configMap:
             name: polar-keycloak
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: polar-keycloak
+  labels:
+    app: polar-keycloak
+spec:
+  type: NodePort
+  #type: ClusterIP
+  selector:
+    app: polar-keycloak
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+      nodePort: 30880
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: keycloak-ingress
+  labels:
+    app: polar-keycloak
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: keycloak.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: polar-keycloak
+                port:
+                  number: 80
