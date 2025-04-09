@@ -5,7 +5,10 @@ resources:
   - github.com/gompangii/edge-service/k8s?ref=main
 
 patches:
-  - patch-env.yml
+  - path: patch-env.yml
+    target:
+      kind: Deployment
+      name: edge-service
 
 configMapGenerator:
   - behavior: merge

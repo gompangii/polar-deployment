@@ -5,7 +5,10 @@ resources:
   - github.com/gompangii/dispatcher-service/k8s?ref=main
 
 patches:
-  - patch-env.yml
+  - path: patch-env.yml
+    target:
+      kind: Deployment
+      name: dispatcher-service
 
 configMapGenerator:
   - behavior: merge

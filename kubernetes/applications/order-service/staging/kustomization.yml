@@ -5,7 +5,10 @@ resources:
   - github.com/gompangii/order-service/k8s?ref=main
 
 patches:
-  - patch-env.yml
+  - path: patch-env.yml
+    target:
+      kind: Deployment
+      name: order-service
 
 configMapGenerator:
   - behavior: merge
