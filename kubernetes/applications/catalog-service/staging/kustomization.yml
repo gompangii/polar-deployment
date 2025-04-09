@@ -12,3 +12,8 @@ configMapGenerator:
     files:
       - application-staging.yml
     name: catalog-config
+
+images:
+  - name: catalog-service
+    newName: docker.io/gompangii/catalog-service
+    newTag: latest
