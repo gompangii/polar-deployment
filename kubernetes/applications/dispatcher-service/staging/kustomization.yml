@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - github.com/gompangii/dispatcher-service/k8s?ref=main
 
-patchesStrategicMerge:
+patches:
   - patch-env.yml
 
 configMapGenerator:
